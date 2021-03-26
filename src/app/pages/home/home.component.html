@@ -1,0 +1,40 @@
+<div class="card">
+  <div class="card-header">Register Users</div>
+  <div class="card-body">
+    <div class="form-group mb-4">
+      <label>Name</label>
+      <input type="text" class="form-control" [(ngModel)]="name" />
+    </div>
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <label>Email</label>
+        <input type="text" class="form-control" [(ngModel)]="email" />
+      </div>
+      <div class="col-md-6">
+        <label>Select Team</label>
+        <select class="form-control" [(ngModel)]="team">
+          <option value="TEAM_BLUE">Team Blue</option>
+          <option value="TEAM_GREEN">Team Green</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="btn btn-primary" (click)="saveUser()">Save</button>
+  </div>
+</div>
+
+<section *ngIf="users$ | async as users">
+  <div class="card my-4" *ngFor="let user of users">
+    <div class="card-body">
+      <h5 class="font-weight-bold">Name : {{ user?.name }}</h5>
+      <p>Email : {{ user?.email }}</p>
+    </div>
+    <div class="card-footer text-white" [ngClass]="
+    {
+        'bg-primary': user?.team == 'TEAM_BLUE',
+        'bg-success' : user?.team == 'TEAM_GREEN'
+    }
+    ">
+      </div>
+  </div>
+</section>
