@@ -9,6 +9,9 @@ import { StoreModule } from '@ngrx/store';
 import { userReducer } from './store/user/user.reducers';
 import { TeamGreenComponent } from './pages/team-green/team-green.component';
 import { TeamBlueComponent } from './pages/team-blue/team-blue.component';
+import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
+import { EffectsModule } from '@ngrx/effects';
+import { UserEffects } from './store/user/user.effects';
 
 @NgModule({
   declarations: [
@@ -21,9 +24,14 @@ import { TeamBlueComponent } from './pages/team-blue/team-blue.component';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    StoreModule.forRoot({ user : userReducer})
+    StoreModule.forRoot({ user : userReducer}),
+    EffectsModule.forRoot([UserEffects]),
+    SnotifyModule
   ],
-  providers: [],
+  providers: [
+    { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
+    SnotifyService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
