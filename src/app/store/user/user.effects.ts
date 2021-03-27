@@ -17,7 +17,6 @@ export class UserEffects{
             tap(() => {
                 this.snotifyService.success("User Created Succesfully")
             }),
-            exhaustMap(() => [])
-        )
+        ), { dispatch : false}
     )
 }
